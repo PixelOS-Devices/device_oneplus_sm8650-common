@@ -272,8 +272,14 @@ PRODUCT_PACKAGES += \
 $(call inherit-product, hardware/oplus/overlay/generic/generic.mk)
 $(call inherit-product, hardware/oplus/overlay/qssi/qssi.mk)
 
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
+ifneq ($(TARGET_IS_TABLET),true)
+    DEVICE_PACKAGE_OVERLAYS += \
+        $(LOCAL_PATH)/overlay-aosp
+else
+    DEVICE_PACKAGE_OVERLAYS += \
+        $(LOCAL_PATH)/overlay-aosp-tablet
+
+endif
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
